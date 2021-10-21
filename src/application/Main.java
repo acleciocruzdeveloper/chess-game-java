@@ -18,18 +18,17 @@ public class Main {
         List<ChessPiece> captured = new ArrayList<> ();
 
 
-
-        while (true) {
+        while (!chessMatch.getCheckMate ()) {
             try {
                 UI.clearScreen ();
-                UI.printMatch ( chessMatch, captured);
+                UI.printMatch ( chessMatch, captured );
                 System.out.println ();
                 System.out.print ( "Source: " );
                 ChessPosition source = UI.readChessPosition ( sc );
 
-                boolean[][] possibleMoves = chessMatch.possibleMoves(source);
+                boolean[][] possibleMoves = chessMatch.possibleMoves ( source );
                 UI.clearScreen ();
-                UI.printBoard ( chessMatch.getPieces (), possibleMoves);
+                UI.printBoard ( chessMatch.getPieces (), possibleMoves );
 
                 System.out.println ();
                 System.out.print ( "Target: " );
@@ -39,15 +38,16 @@ public class Main {
                 if (capturedPiece != null) {
                     captured.add ( capturedPiece );
                 }
-            }
-            catch (ChessException e ){
-                System.out.println (e.getMessage ());
+            } catch (ChessException e) {
+                System.out.println ( e.getMessage () );
                 sc.nextLine ();
 
-            }catch (InputMismatchException e){
-                System.out.println (e.getMessage ());
+            } catch (InputMismatchException e) {
+                System.out.println ( e.getMessage () );
                 sc.nextLine ();
             }
         }
+        UI.clearScreen ();
+        UI.printMatch ( chessMatch, captured );
     }
 }
